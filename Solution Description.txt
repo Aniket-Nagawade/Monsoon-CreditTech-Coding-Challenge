@@ -1,0 +1,13 @@
+﻿We use the below steps in building the machine learning pipeline for the given problem of predicting the probability value of the data points of the test dataset belonging to class label “1”.
+	Step 1:  Preprocess the data using the below steps:
+		1. Converting the boolean features "C6" and "C8" into numerical features by assigning True a value of 1 and False a value of 0
+		2. Checking the correlation of features. It was found out that there are features having a correlation of greater than 0.9. We 		remove these features.
+		3. Handling missing values. 
+			i. Dropping the columns having more than 80 percent of null values as the performance of the models after removing these 			columns is relatively same to the performance of models trained on the dataset wherein the null values in these columns 			are filled with their mean values. Also, since we have no information about the column and its importance; we drop these 			columns as 80 percent is relatively high and also since there is no drop in performance.  
+			ii. We fill the remaining null values with their mean.
+		4. Checking the distribution of the dataset. It can be seen that the data is imbalanced. So, we use SMOTE to balance the class 		distribution by randomly increasing minority class examples by replicating them.
+		5. Standardizing the numerical columns. Basically, we are transforming the numerical features by subtracting them from its 			mean and dividing by its standard deviation.
+	
+	Step 2: Implementing Machine Learning models. We use models like linear regression, Decision Trees, Random Forest and Gradient 	Boosting Decision Tree. It was found that the mean cross validated roc-auc score using Random Forest is the highest so, we use 	Random Forest model to predict the class labels of the test dataset. 
+	
+	Step 3: We create a dataframe with the “Unique_Id” feature of the test dataset and the predicted probability value of the data 	points belonging to class label “1”.  We store them in a csv file.
